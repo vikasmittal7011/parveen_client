@@ -1,25 +1,40 @@
 import { useForm } from "react-hook-form";
 import { ClipLoader } from "react-spinners";
-import { IoIosSend } from "react-icons/io";
+// import { IoIosSend } from "react-icons/io";
 import { inputClass_2 } from "../../constant";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  clearMessage,
+  enrollStudentAync,
+  selectenroll,
+} from "../../features/enroll/enrollSlice";
+import Toast from "../common/Toast";
 
 const NewsPaperForm = () => {
-  const status = "idle";
+  const { status, message } = useSelector(selectenroll);
+  const dispatch = useDispatch();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm();
 
   const onSubmit = handleSubmit(async (data) => {
-    console.log(data);
+    dispatch(enrollStudentAync(data));
+    reset();
   });
 
   return (
     <div>
+      <Toast
+        type={status === "failed" ? "error" : "success"}
+        message={message}
+        clearMessage={clearMessage}
+      />
       <h1 className="text-lg base:text-xl font-bold text-center text-gray-700">
-        Register To Follow Daily Tech News
+        Register
       </h1>
 
       <form className="flex flex-col gap-2 my-5" onSubmit={onSubmit}>
@@ -57,14 +72,14 @@ const NewsPaperForm = () => {
         )}
 
         <input
-          {...register("cource", {
+          {...register("course", {
             required: "Required...",
           })}
-          placeholder="Interested Cource"
+          placeholder="Interested Course"
           className={inputClass_2}
         />
-        {errors.cource && (
-          <span className="text-red-500">{errors.cource.message}</span>
+        {errors.course && (
+          <span className="text-red-500">{errors.course.message}</span>
         )}
 
         <textarea
@@ -91,8 +106,8 @@ const NewsPaperForm = () => {
               color="white"
               loading={status === "loading"}
             />
-            <div>Subscribe</div>
-            <IoIosSend />
+            <div>Enroll Now</div>
+            {/* <IoIosSend /> */}
           </button>
         </div>
       </form>

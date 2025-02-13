@@ -8,12 +8,11 @@ const CourseCard = ({ course }) => {
         <img
           alt={course?.title}
           src={course?.image || AlternativeImage}
-          // height={200}
-          // width={200}
+          className="object-fill w-full h-48"
         />
         <div className="mx-2">
           <h1 className="text-xl font-bold text-blue-700 py-2">
-            {course?.title.slice(0,15)}...
+            {course?.title.slice(0, 15)}...
           </h1>
           {/* <p className="text-gray-600">Duration: {course?.duration}</p> */}
         </div>

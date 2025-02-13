@@ -13,7 +13,7 @@ const Course = () => {
         <h1 className="text-xl base:text-2xl md:text-3xl font-bold text-gray-700 py-2">
           Cource
         </h1>
-        <p className="text-3xl base:text-base">
+        <p className="text-3xl xs:text-base">
           Our courses catalogue enable individuals and teams to perform.
         </p>
       </div>

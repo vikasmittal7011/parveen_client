@@ -14,7 +14,7 @@ const Layout = ({ children }) => {
         <>
           <div className="flex min-h-screen flex-col">
             <Header />
-            <Hero />
+            {/* <Hero /> */}
             <div className="p-4 flex-1 py-10">{children}</div>
             <Footer />
           </div>

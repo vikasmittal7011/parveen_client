@@ -8,7 +8,9 @@ const Footer = () => {
   return (
     <div className="bg-blue-800 py-5 md:py-10 md:px-20">
       <div className="p-4 mx-auto text-white tracking-wider flex md:justify-between flex-col md:flex-row gap-3">
-        <span className="text-2xl md:text-3xl font-bold w-1/4">Vikey</span>
+        <span className="text-2xl md:text-3xl font-bold w-1/4">
+          ItTransitionHub
+        </span>
         <div className="flex flex-wrap gap-5 justify-between w-3/4">
           <span className="flex flex-col gap-3">
             <h3 className="font-bold text-lg mb-2">Company</h3>
@@ -51,7 +53,7 @@ const Footer = () => {
       <hr className="border-t-2 border-gray-400 my-4" />
       <div className="font-semibold space-x-2 flex justify-center items-center tracking-wider">
         <p className="text-center text-white my-2">
-          &copy; 2021 Vikey. All Rights Reserved.
+          &copy; 2025 ItTransitionHub. All Rights Reserved.
         </p>
       </div>
     </div>

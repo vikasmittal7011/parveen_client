@@ -13,6 +13,7 @@ import { scrollToTop } from "../constant";
 import EnrollPopUp from "../components/course/EnrollPopUp";
 import EnrollConfirm from "../components/course/EnrollConfirm";
 import StudentsDetails from "../components/course/StudentsDetails";
+import AlternativeImage from "../constant/images/alt.jpg";
 
 const Course = () => {
   const { user } = useSelector(selectuser);
@@ -89,11 +90,18 @@ const Course = () => {
                     {course?.title}
                   </h1>
                   <p className="text-lg">{course?.description}</p>
+
+                  <button
+                    className="outline-none py-2 px-5 bg-green-600 w-fit rounded-lg text-white font-semibold tracking-wide hover:bg-green-500 transition-all ease-in-out"
+                    onClick={handleEnroll}
+                  >
+                    Post A Review
+                  </button>
                   {/* <div className="flex justify-between">
                     <p className="text-lg">Price: {course?.price}</p>
                     <p className="text-lg">Duration: {course?.duration}</p>
                   </div> */}
-                  <div className="flex justify-between items-center">
+                  {/* <div className="flex justify-between items-center">
                     {!course?.enrolled?.includes(user?.id) && (
                       <button
                         className="outline-none py-2 px-5 bg-green-600 w-fit rounded-lg text-white font-semibold tracking-wide hover:bg-green-500 transition-all ease-in-out"
@@ -110,12 +118,12 @@ const Course = () => {
                         Students Details
                       </button>
                     )}
-                  </div>
+                  </div> */}
                 </div>
                 <div className="md:w-1/3">
                   <img
                     alt={course?.title}
-                    src={course?.image}
+                    src={course?.image || AlternativeImage}
                     className="rounded-lg shadow-lg w-full"
                   />
                 </div>
