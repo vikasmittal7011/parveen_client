@@ -1,31 +1,31 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "./components/common/Layout";
 import { Course, Home, Login, Register } from "./pages";
-import { Suspense, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchUserDataAsync } from "./features/user/userSlice";
-import { selectauth } from "./features/auth/authSlice";
+import { Suspense } from "react";
+// import { useDispatch, useSelector } from "react-redux";
+// import { fetchUserDataAsync } from "./features/user/userSlice";
+// import { selectauth } from "./features/auth/authSlice";
 import Loading from "./components/common/Loading";
 import CourseForm from "./pages/CourseForm";
-import { fetchCoursesAsync } from "./features/course/courseSlice";
+// import { fetchCoursesAsync } from "./features/course/courseSlice";
 
 const App = () => {
-  const { registerSuccess, loginSuccess, logoutSuccess } =
-    useSelector(selectauth);
+  // const { registerSuccess, loginSuccess, logoutSuccess } =
+  //   useSelector(selectauth);
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  useEffect(() => {
-    // setTimeout(() => {
-    dispatch(fetchUserDataAsync());
-    // }, 1000);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch, loginSuccess, registerSuccess, logoutSuccess]);
+  // useEffect(() => {
+  //   // setTimeout(() => {
+  //   dispatch(fetchUserDataAsync());
+  //   // }, 1000);
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [dispatch, loginSuccess, registerSuccess, logoutSuccess]);
 
-  useEffect(() => {
-    dispatch(fetchCoursesAsync());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  // useEffect(() => {
+  //   dispatch(fetchCoursesAsync());
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
   return (
     <BrowserRouter>

@@ -23,10 +23,8 @@ export const getCourses = async () => {
       const response = await axios.get(API + "course", {
         withCredentials: true,
       });
-      console.log(response);
       resolve({ data: response.data });
     } catch (error) {
-      console.log(error);
       reject({ message: error.response.data.message });
     }
   });

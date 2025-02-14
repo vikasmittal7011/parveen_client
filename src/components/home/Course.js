@@ -5,8 +5,6 @@ import { selectcourse } from "../../features/course/courseSlice";
 const Course = () => {
   const { courses } = useSelector(selectcourse);
 
-  console.log(courses);
-
   return (
     <div className="container mx-auto py-6 md:py-20">
       <div className="text-center">

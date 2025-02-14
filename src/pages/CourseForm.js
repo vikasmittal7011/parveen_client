@@ -59,8 +59,6 @@ const CourseForm = () => {
     dispatch(createCourceAsync({ ...data, image: photos || "" }));
   });
 
-  console.log(newCourse);
-
   useEffect(() => {
     if (newCourse?.title !== undefined) {
       const id = newCourse?.id;

@@ -14,15 +14,35 @@ import EnrollPopUp from "../components/course/EnrollPopUp";
 import EnrollConfirm from "../components/course/EnrollConfirm";
 import StudentsDetails from "../components/course/StudentsDetails";
 import AlternativeImage from "../constant/images/alt.jpg";
+import PostReviewForm from "../components/course/PostReviewForm";
+import {
+  fetchReviewsAsync,
+  selectReview,
+  clearMessage,
+  postReviewAsync,
+} from "../features/review/reviewSlice";
+import Toast from "../components/common/Toast";
+import InfiniteScroll from "react-infinite-scroll-component";
+import CourseReview from "../components/course/CourseReview";
+import { ClipLoader } from "react-spinners";
 
 const Course = () => {
   const { user } = useSelector(selectuser);
   const { course, status, enrollSuccess } = useSelector(selectcourse);
+  const {
+    reviews,
+    totalReviews,
+    isReviewAdded,
+    status: reviewStatus,
+    message,
+  } = useSelector(selectReview);
   const { id } = useParams();
 
+  const [page, setPage] = useState(1);
   const [open, setOpen] = useState(false);
   const [openDone, setOpenDone] = useState(false);
   const [openStudent, setOpenStudent] = useState(false);
+  const [openReview, setOpenReview] = useState(false);
 
   const navigate = useNavigate();
 
@@ -36,9 +56,20 @@ const Course = () => {
     }
   };
 
+  const handleModel = () => {
+    setOpenReview(!openReview);
+  };
+
   const handleEnrollConfirm = () => {
     dispatch(enrollStudentAsync(id));
     setOpen(false);
+  };
+
+  const formAction = (data) => {
+    dispatch(postReviewAsync(data));
+    handleModel();
+    const pagination = { _page: page, _limit: 5 };
+    dispatch(fetchReviewsAsync({ id, pagination }));
   };
 
   useEffect(() => {
@@ -47,10 +78,9 @@ const Course = () => {
 
   useEffect(() => {
     dispatch(fetchCoursesByIdAsync(id));
+    dispatch(fetchReviewsAsync({ id, pagination: { _page: page, _limit: 5 } }));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  console.log("course", course);
+  }, [isReviewAdded]);
 
   useEffect(() => {
     if (enrollSuccess) {
@@ -60,12 +90,23 @@ const Course = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [enrollSuccess]);
 
+  useEffect(() => {
+    const pagination = { _page: page, _limit: 5 };
+    dispatch(fetchReviewsAsync({ id, pagination }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id, page]);
+
   return (
     <>
       {status === "loading" ? (
         <Loading />
       ) : (
         <>
+          <Toast
+            type={status === "failed" ? "error" : "success"}
+            message={message}
+            clearMessage={clearMessage}
+          />
           <EnrollPopUp
             open={open}
             setOpen={setOpen}
@@ -82,6 +123,14 @@ const Course = () => {
             open={openStudent}
             students={course?.enrolled || []}
           />
+          <PostReviewForm
+            isOpen={openReview}
+            handleModal={handleModel}
+            action="Post Review"
+            title="Post new review for course here...."
+            course={course}
+            formAction={formAction}
+          />
           {course?.title !== undefined ? (
             <div className="md:mx-10">
               <div className="flex gap-5 justify-between flex-col md:flex-row">
@@ -93,15 +142,15 @@ const Course = () => {
 
                   <button
                     className="outline-none py-2 px-5 bg-green-600 w-fit rounded-lg text-white font-semibold tracking-wide hover:bg-green-500 transition-all ease-in-out"
-                    onClick={handleEnroll}
+                    onClick={handleModel}
                   >
                     Post A Review
                   </button>
                   {/* <div className="flex justify-between">
                     <p className="text-lg">Price: {course?.price}</p>
                     <p className="text-lg">Duration: {course?.duration}</p>
-                  </div> */}
-                  {/* <div className="flex justify-between items-center">
+                  </div>
+                  <div className="flex justify-between items-center">
                     {!course?.enrolled?.includes(user?.id) && (
                       <button
                         className="outline-none py-2 px-5 bg-green-600 w-fit rounded-lg text-white font-semibold tracking-wide hover:bg-green-500 transition-all ease-in-out"
@@ -147,6 +196,35 @@ const Course = () => {
                   </div>
                 ))}
               </div>
+              {reviews.length > 0 && (
+                <div
+                  className="mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-3 mt-3"
+                  id="reviews"
+                >
+                  <h1 className="text-2xl font-bold tracking-tight my-3">
+                    Reviews
+                  </h1>
+                  <InfiniteScroll
+                    dataLength={totalReviews}
+                    next={() => {
+                      setPage(page + 1);
+                    }}
+                    hasMore={totalReviews > reviews.length}
+                    loader={
+                      <div className={`flex justify-center my-2`}>
+                        <img
+                          src={<ClipLoader size={100} color="blue" />}
+                          alt="Loading"
+                          width={100}
+                          height={100}
+                        />
+                      </div>
+                    }
+                  >
+                    <CourseReview reviews={reviews} course={course} />
+                  </InfiniteScroll>
+                </div>
+              )}
             </div>
           ) : (
             <div className="flex justify-center items-center flex-col gap-2">

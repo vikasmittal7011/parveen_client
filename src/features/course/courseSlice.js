@@ -55,7 +55,6 @@ export const courseSlice = createSlice({
       state.message = null;
     },
     emptyNewCourse: (state) => {
-      console.log("empty course", JSON.stringify(state.newCourse));
       state.newCourse = {};
     },
     clearEnrollSuccess: (state) => {
