@@ -23,7 +23,7 @@ const CourseList = () => {
         dispatch(fetchCoursesByCategoryAsync(catgoryId));
       }
     }
-  }, [category, categories]);
+  }, [category, categories, dispatch]);
 
   return (
     <div className="container mx-auto py-6 md:py-10">

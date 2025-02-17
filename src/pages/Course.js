@@ -5,9 +5,9 @@ import {
   fetchCourseByTitleAsync,
   selectcourse,
 } from "../features/course/courseSlice";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Loading from "../components/common/Loading";
-import { selectuser } from "../features/user/userSlice";
+// import { selectuser } from "../features/user/userSlice";
 import { scrollToTop } from "../constant";
 import EnrollPopUp from "../components/course/EnrollPopUp";
 import EnrollConfirm from "../components/course/EnrollConfirm";
@@ -27,17 +27,11 @@ import { ClipLoader } from "react-spinners";
 import EnollmentForm from "../components/course/EnollmentForm";
 
 const Course = () => {
-  const { user } = useSelector(selectuser);
+  // const { user } = useSelector(selectuser);
   const { course, status, enrollSuccess } = useSelector(selectcourse);
-  const {
-    reviews,
-    totalReviews,
-    isReviewAdded,
-    status: reviewStatus,
-    message,
-  } = useSelector(selectReview);
+  const { reviews, totalReviews, isReviewAdded, message } =
+    useSelector(selectReview);
   const { title } = useParams();
-  const params = useParams();
 
   const [page, setPage] = useState(1);
   const [open, setOpen] = useState(false);
@@ -45,17 +39,17 @@ const Course = () => {
   const [openStudent, setOpenStudent] = useState(false);
   const [openReview, setOpenReview] = useState(false);
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const dispatch = useDispatch();
 
-  const handleEnroll = () => {
-    if (user?.email) {
-      setOpen(true);
-    } else {
-      navigate("/login");
-    }
-  };
+  // const handleEnroll = () => {
+  //   if (user?.email) {
+  //     setOpen(true);
+  //   } else {
+  //     navigate("/login");
+  //   }
+  // };
 
   const handleModel = () => {
     setOpenReview(!openReview);

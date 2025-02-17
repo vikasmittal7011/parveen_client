@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import { useSelector } from "react-redux";
-import { selectuser } from "../../features/user/userSlice";
+// import { useSelector } from "react-redux";
+// import { selectuser } from "../../features/user/userSlice";
 
 const LoginLinks = ({ handleClick }) => {
-  const { user } = useSelector(selectuser);
+  // const { user } = useSelector(selectuser);
 
   const [isOpen, setIsOpen] = useState(false);
 

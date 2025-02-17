@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { Header, Hero, Footer } from "../layout/index";
+import { Header,  Footer } from "../layout/index";
 import { selectuser } from "../../features/user/userSlice";
 import Loading from "./Loading";
 

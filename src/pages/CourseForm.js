@@ -77,6 +77,7 @@ const CourseForm = () => {
     if (categories.length === 0) {
       dispatch(getCategoriesAsync());
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

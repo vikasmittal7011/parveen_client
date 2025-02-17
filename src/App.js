@@ -11,12 +11,12 @@ import {
   ThankYou,
 } from "./pages";
 import { Suspense, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 // import { fetchUserDataAsync } from "./features/user/userSlice";
 // import { selectauth } from "./features/auth/authSlice";
 import Loading from "./components/common/Loading";
 import CourseForm from "./pages/CourseForm";
-import { fetchCoursesAsync } from "./features/course/courseSlice";
+// import { fetchCoursesAsync } from "./features/course/courseSlice";
 import { getCategoriesAsync } from "./features/category/categorySlice";
 
 const App = () => {

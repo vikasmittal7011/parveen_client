@@ -10,7 +10,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const EnollmentForm = () => {
-  const { status, message, dataSend } = useSelector(selectenroll);
+  const { status, dataSend } = useSelector(selectenroll);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -30,6 +30,7 @@ const EnollmentForm = () => {
     if (dataSend) {
       navigate("/enrollment-success");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dataSend]);
 
   return (

@@ -12,7 +12,7 @@ import LoginLinks from "./LoginLinks";
 const Header = () => {
   const dispatch = useDispatch();
 
-  const { user, message, status } = useSelector(selectuser);
+  const { message, status } = useSelector(selectuser);
 
   const handleClick = () => {
     dispatch(logoutUserAsync());
