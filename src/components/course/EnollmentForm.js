@@ -1,18 +1,15 @@
 import { useForm } from "react-hook-form";
 import { ClipLoader } from "react-spinners";
-// import { IoIosSend } from "react-icons/io";
 import { inputClass_2 } from "../../constant";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  // clearMessage,
   enrollStudentAync,
   selectenroll,
 } from "../../features/enroll/enrollSlice";
-// import Toast from "../common/Toast";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-const NewsPaperForm = () => {
+const EnollmentForm = () => {
   const { status, message, dataSend } = useSelector(selectenroll);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -37,11 +34,6 @@ const NewsPaperForm = () => {
 
   return (
     <div>
-      {/* <Toast
-        type={status === "failed" ? "error" : "success"}
-        message={message}
-        clearMessage={clearMessage}
-      /> */}
       <h1 className="text-lg base:text-xl font-bold text-center text-gray-700">
         Enqiry Now
       </h1>
@@ -124,4 +116,4 @@ const NewsPaperForm = () => {
   );
 };
 
-export default NewsPaperForm;
+export default EnollmentForm;

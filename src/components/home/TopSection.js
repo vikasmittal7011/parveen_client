@@ -1,50 +1,38 @@
-import KeyPoint from "./KeyPoint";
-import { FaRegCheckCircle } from "react-icons/fa";
-import NewsPaperForm from "./NewsPaperForm";
+import React from "react";
+import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 
+const images = [
+  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxW2gvtCFH3lQJFmjp3NuoydvBgsFqV04POg&s",
+  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYTRzLea_0zPoz0O7aO_fsZNjo8V5g5FEEpA&s",
+  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFU7U2h0umyF0P6E_yhTX45sGgPEQAbGaJ4g&s",
+  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrUb_SAqHuPx57Y-keP9dzAHNtoCo54OpRxQ&s",
+];
 const TopSection = () => {
   return (
-    <div className="md:flex justify-between container mx-auto py-6 md:py-20 gap-2">
-      <div className="text-center md:w-2/3">
-        <h1 className="text-xl base:text-2xl md:text-3xl text-gray-800 font-bold py-2">
-          No.1 Software (IT) Training Institute in India
-        </h1>
-        <p className="mx-2 base:mx-0">
-          Our courses catalogue enable individuals and teams to perform.
-        </p>
-
-        <KeyPoint title="About Us" defaultShow={false}>
-          It Transition Hub is one of the India’s leading Class Room & Online
-          training providers. We partner with IT companies and individuals to
-          address their unique needs, providing training and coaching that helps
-          working professionals achieve their career goals. Our training courses
-          are designed and updated by 650+ renowned industry experts, We have
-          been named the No.1 most influential education brand in India by
-          LinkedIn. Benefits: Reduce the implementation time of new services
-          from months to minutes.
-          <br />
-          Increase productivity of the business and IT teams. Save costs on
-          maintenance and upgrades, and eliminate unnecessary capital
-          expenditure. Standardize processes for easy replication and faster
-          deliver.
-        </KeyPoint>
-
-        <KeyPoint title="WHY, you join us?" defaultShow={true}>
-          <div>
-            <p className="flex justify-items-start items-center gap-2">
-              <span>
-                <FaRegCheckCircle className="text-blue-400" />{" "}
-              </span>
-              ITH is the only training provider with a 100% money-back
-              guarantee.
-            </p>
+    <div className="w-full mx-auto">
+      {" "}
+      {/* Adjust max-width for laptop screens */}
+      <Carousel
+        axis="horizontal" // Set the carousel to vertical mode
+        showArrows={true} // Show navigation arrows
+        showThumbs={false} // Hide thumbnail images
+        showStatus={false} // Hide status indicator
+        infiniteLoop={true} // Enable infinite looping
+        autoPlay={true} // Enable auto-slide
+        interval={3000} // Set auto-slide interval to 3 seconds
+        stopOnHover={true} // Pause auto-slide on hover
+      >
+        {images.map((image, index) => (
+          <div key={index} className="h-[400px] w-full">
+            <img
+              src={image}
+              alt={`Slide ${index}`}
+              className="w-full h-full object-cover"
+            />
           </div>
-        </KeyPoint>
-      </div>
-
-      <div className="md:w-1/3 border-2 p-4 h-fit rounded-md">
-        <NewsPaperForm />
-      </div>
+        ))}
+      </Carousel>
     </div>
   );
 };

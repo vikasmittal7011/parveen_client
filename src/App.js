@@ -1,6 +1,15 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "./components/common/Layout";
-import { Course, CourseList, Home, Login, Register, ThankYou } from "./pages";
+import {
+  AboutUs,
+  Course,
+  CourseList,
+  Home,
+  Login,
+  PageNotFound,
+  Register,
+  ThankYou,
+} from "./pages";
 import { Suspense, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 // import { fetchUserDataAsync } from "./features/user/userSlice";
@@ -36,7 +45,7 @@ const App = () => {
           <Route
             path="/"
             element={
-              <Layout>
+              <Layout custome={false}>
                 <Home />
               </Layout>
             }
@@ -86,7 +95,17 @@ const App = () => {
               </Layout>
             }
           />
+          <Route
+            exact
+            path="/about-us"
+            element={
+              <Layout>
+                <AboutUs />
+              </Layout>
+            }
+          />
           <Route exact path="/enrollment-success" element={<ThankYou />} />
+          <Route exact path="*" element={<PageNotFound />} />
         </Routes>
       </Suspense>
     </BrowserRouter>

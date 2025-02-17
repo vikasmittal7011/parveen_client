@@ -73,8 +73,6 @@ const CourseForm = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [newCourse]);
 
-  console.log(categories);
-
   useEffect(() => {
     if (categories.length === 0) {
       dispatch(getCategoriesAsync());

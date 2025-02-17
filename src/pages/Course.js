@@ -24,6 +24,7 @@ import Toast from "../components/common/Toast";
 import InfiniteScroll from "react-infinite-scroll-component";
 import CourseReview from "../components/course/CourseReview";
 import { ClipLoader } from "react-spinners";
+import EnollmentForm from "../components/course/EnollmentForm";
 
 const Course = () => {
   const { user } = useSelector(selectuser);
@@ -37,7 +38,6 @@ const Course = () => {
   } = useSelector(selectReview);
   const { title } = useParams();
   const params = useParams();
-  console.log(params, title);
 
   const [page, setPage] = useState(1);
   const [open, setOpen] = useState(false);
@@ -183,24 +183,29 @@ const Course = () => {
                   />
                 </div>
               </div>
-              <div>
-                <h1 className="text-2xl font-bold text-gray-600 py-5">
-                  Modules
-                </h1>
-                {course?.modules?.map((module, key) => (
-                  <div key={key} className="p-4 mb-5">
-                    <h2 className="text-xl font-bold">{module.title}</h2>
-                    {module?.keyPoints?.map((keyPoint, keyPointIndex) => (
-                      <div
-                        key={keyPointIndex}
-                        className="flex items-center gap-2 my-1 ps-1 text-gray-700"
-                      >
-                        <span className="text-gray-600">{"->"} </span>
-                        <p>{keyPoint}</p>
-                      </div>
-                    ))}
-                  </div>
-                ))}
+              <div className="flex justify-between w-full my-10 flex-col md:flex-row">
+                <div className="md:w-2/3">
+                  <h1 className="text-2xl font-bold text-gray-600 py-5">
+                    Modules
+                  </h1>
+                  {course?.modules?.map((module, key) => (
+                    <div key={key} className="p-4 mb-5">
+                      <h2 className="text-xl font-bold">{module.title}</h2>
+                      {module?.keyPoints?.map((keyPoint, keyPointIndex) => (
+                        <div
+                          key={keyPointIndex}
+                          className="flex items-center gap-2 my-1 ps-1 text-gray-700"
+                        >
+                          <span className="text-gray-600">{"->"} </span>
+                          <p>{keyPoint}</p>
+                        </div>
+                      ))}
+                    </div>
+                  ))}
+                </div>
+                <div className="md:w-1/3">
+                  <EnollmentForm />
+                </div>
               </div>
               {reviews.length > 0 && (
                 <div

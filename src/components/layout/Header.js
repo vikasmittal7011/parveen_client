@@ -42,7 +42,8 @@ const Header = () => {
                     </span>
                     :
                     <LoginLinks handleClick={handleClick} />
-                } */}
+                    } */}
+        <LoginLinks handleClick={handleClick} />
       </div>
     </div>
   );

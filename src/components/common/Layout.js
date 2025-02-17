@@ -3,7 +3,7 @@ import { Header, Hero, Footer } from "../layout/index";
 import { selectuser } from "../../features/user/userSlice";
 import Loading from "./Loading";
 
-const Layout = ({ children }) => {
+const Layout = ({ children, custome = true }) => {
   const { status } = useSelector(selectuser);
 
   return (
@@ -15,7 +15,7 @@ const Layout = ({ children }) => {
           <div className="flex min-h-screen flex-col">
             <Header />
             {/* <Hero /> */}
-            <div className="p-4 flex-1 py-10">{children}</div>
+            <div className={`${custome && "p-4 py-10"} flex-1`}>{children}</div>
             <Footer />
           </div>
         </>

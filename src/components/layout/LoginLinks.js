@@ -16,16 +16,37 @@ const LoginLinks = ({ handleClick }) => {
   return (
     <>
       <div className="md:flex gap-4 hidden">
-        {user?.role === "admin" && (
+        {/* {user?.role === "admin" && (
           <Link
             to="/add-cource"
             className="rounded-md flex items-center px-2 lg:px-5 bg-blue-500 hover:text-blue-500 hover:bg-gray-100 transition outline-none"
           >
             Add Cource's
           </Link>
-        )}
+        )} */}
 
-        <span className="flex space-x-2 text-xl">
+        <Link
+          to="/about-us"
+          className="rounded-md flex items-center px-2 lg:px-5 bg-blue-500 hover:text-blue-500 hover:bg-gray-100 transition outline-none"
+        >
+          About Us
+        </Link>
+
+        <Link
+          to="/"
+          className="rounded-md flex items-center px-2 lg:px-5 bg-blue-500 hover:text-blue-500 hover:bg-gray-100 transition outline-none"
+        >
+          Our Courses
+        </Link>
+
+        <Link
+          to="/"
+          className="rounded-md flex items-center px-2 lg:px-5 bg-blue-500 hover:text-blue-500 hover:bg-gray-100 transition outline-none"
+        >
+          Contact Us
+        </Link>
+
+        {/* <span className="flex space-x-2 text-xl">
           <button
             onClick={handleClick}
             to="/login"
@@ -33,7 +54,7 @@ const LoginLinks = ({ handleClick }) => {
           >
             Logout
           </button>
-        </span>
+        </span> */}
       </div>
 
       <Bars3Icon
@@ -49,14 +70,35 @@ const LoginLinks = ({ handleClick }) => {
         <XMarkIcon className="w-8 h-8 ms-3 absolute" onClick={handleIsOpen} />
 
         <div className="mt-14 flex flex-col gap-5 px-3">
-          <Link
+          {/* <Link
             to="/add-cource"
             className="border-b-2 pb-1 flex items-center px-2 hover:text-blue-500 transition outline-none"
           >
             Add Cource's
+          </Link> */}
+
+          <Link
+            to="/about-us"
+            className="border-b-2 pb-1 flex items-center px-2 hover:text-blue-500 transition outline-none"
+          >
+            About Us
           </Link>
 
-          <span className="flex space-x-2 text-xl">
+          <Link
+            to="/"
+            className="border-b-2 pb-1 flex items-center px-2 hover:text-blue-500 transition outline-none"
+          >
+            Our Courses
+          </Link>
+
+          <Link
+            to="/"
+            className="border-b-2 pb-1 flex items-center px-2 hover:text-blue-500 transition outline-none"
+          >
+            Contact Us
+          </Link>
+
+          {/* <span className="flex space-x-2 text-xl">
             <button
               onClick={handleClick}
               to="/login"
@@ -64,7 +106,7 @@ const LoginLinks = ({ handleClick }) => {
             >
               Logout
             </button>
-          </span>
+          </span> */}
         </div>
       </div>
     </>
