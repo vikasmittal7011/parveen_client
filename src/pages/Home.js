@@ -1,4 +1,4 @@
-import Cource from "../components/home/Course";
+import Category from "../components/home/Category";
 import Features from "../components/home/Features";
 import TopSection from "../components/home/TopSection";
 
@@ -7,7 +7,7 @@ const Home = () => {
     <>
       <TopSection />
       <Features />
-      <Cource />
+      <Category />
     </>
   );
 };

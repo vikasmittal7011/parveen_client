@@ -4,6 +4,7 @@ import { enrollStudent } from "./enrollAPI";
 const initialState = {
   status: "idle",
   message: null,
+  dataSend: false,
 };
 
 export const enrollStudentAync = createAsyncThunk(
@@ -21,6 +22,9 @@ export const enrollSlice = createSlice({
     clearMessage: (state) => {
       state.message = null;
     },
+    resetDataSend: (state) => {
+      state.dataSend = false;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -30,6 +34,7 @@ export const enrollSlice = createSlice({
       .addCase(enrollStudentAync.fulfilled, (state) => {
         state.status = "idle";
         state.passwordReset = true;
+        state.dataSend = true;
         state.message = "Enrollment successful...";
       })
       .addCase(enrollStudentAync.rejected, (state, action) => {
@@ -39,7 +44,7 @@ export const enrollSlice = createSlice({
   },
 });
 
-export const { clearMessage, retypeData, out } = enrollSlice.actions;
+export const { clearMessage, resetDataSend } = enrollSlice.actions;
 
 export const selectenroll = (state) => state.enroll;
 

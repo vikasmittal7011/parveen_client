@@ -19,8 +19,8 @@ export const postReviewAsync = createAsyncThunk(
 
 export const fetchReviewsAsync = createAsyncThunk(
   "review/fetchReviews",
-  async ({ id, pagination }) => {
-    const response = await fetchReviews(id, pagination);
+  async ({ name, pagination }) => {
+    const response = await fetchReviews(name, pagination);
     return response;
   }
 );

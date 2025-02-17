@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   clearEnrollSuccess,
-  enrollStudentAsync,
-  fetchCoursesByIdAsync,
+  fetchCourseByTitleAsync,
   selectcourse,
 } from "../features/course/courseSlice";
 import { Link, useNavigate, useParams } from "react-router-dom";
@@ -36,7 +35,9 @@ const Course = () => {
     status: reviewStatus,
     message,
   } = useSelector(selectReview);
-  const { id } = useParams();
+  const { title } = useParams();
+  const params = useParams();
+  console.log(params, title);
 
   const [page, setPage] = useState(1);
   const [open, setOpen] = useState(false);
@@ -61,7 +62,7 @@ const Course = () => {
   };
 
   const handleEnrollConfirm = () => {
-    dispatch(enrollStudentAsync(id));
+    // dispatch(enrollStudentAsync(id));
     setOpen(false);
   };
 
@@ -69,7 +70,7 @@ const Course = () => {
     dispatch(postReviewAsync(data));
     handleModel();
     const pagination = { _page: page, _limit: 5 };
-    dispatch(fetchReviewsAsync({ id, pagination }));
+    dispatch(fetchReviewsAsync({ name: title, pagination }));
   };
 
   useEffect(() => {
@@ -77,8 +78,13 @@ const Course = () => {
   }, []);
 
   useEffect(() => {
-    dispatch(fetchCoursesByIdAsync(id));
-    dispatch(fetchReviewsAsync({ id, pagination: { _page: page, _limit: 5 } }));
+    dispatch(fetchCourseByTitleAsync(title));
+    dispatch(
+      fetchReviewsAsync({
+        name: title,
+        pagination: { _page: page, _limit: 5 },
+      })
+    );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isReviewAdded]);
 
@@ -92,9 +98,9 @@ const Course = () => {
 
   useEffect(() => {
     const pagination = { _page: page, _limit: 5 };
-    dispatch(fetchReviewsAsync({ id, pagination }));
+    dispatch(fetchReviewsAsync({ name: title, pagination }));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id, page]);
+  }, [title, page]);
 
   return (
     <>

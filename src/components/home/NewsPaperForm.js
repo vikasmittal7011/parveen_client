@@ -4,15 +4,18 @@ import { ClipLoader } from "react-spinners";
 import { inputClass_2 } from "../../constant";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  clearMessage,
+  // clearMessage,
   enrollStudentAync,
   selectenroll,
 } from "../../features/enroll/enrollSlice";
-import Toast from "../common/Toast";
+// import Toast from "../common/Toast";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const NewsPaperForm = () => {
-  const { status, message } = useSelector(selectenroll);
+  const { status, message, dataSend } = useSelector(selectenroll);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const {
     register,
@@ -26,15 +29,21 @@ const NewsPaperForm = () => {
     reset();
   });
 
+  useEffect(() => {
+    if (dataSend) {
+      navigate("/enrollment-success");
+    }
+  }, [dataSend]);
+
   return (
     <div>
-      <Toast
+      {/* <Toast
         type={status === "failed" ? "error" : "success"}
         message={message}
         clearMessage={clearMessage}
-      />
+      /> */}
       <h1 className="text-lg base:text-xl font-bold text-center text-gray-700">
-        Register
+        Enqiry Now
       </h1>
 
       <form className="flex flex-col gap-2 my-5" onSubmit={onSubmit}>
@@ -106,7 +115,7 @@ const NewsPaperForm = () => {
               color="white"
               loading={status === "loading"}
             />
-            <div>Enroll Now</div>
+            <div>Submt</div>
             {/* <IoIosSend /> */}
           </button>
         </div>

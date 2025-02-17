@@ -19,11 +19,11 @@ export const postReview = (review) => {
   });
 };
 
-export const fetchReviews = (id, page) => {
+export const fetchReviews = (name, page) => {
   let queryString = `_page=${page._page}&_limit=${page._limit}`;
 
   return new Promise(async (resolve, reject) => {
-    const response = await axios.get(API + "review/" + id + "?" + queryString);
+    const response = await axios.get(API + "review/" + name + "?" + queryString);
     const totalReviews = +response.headers.get("X-Total-Count");
     if (response.data.success) {
       resolve({

@@ -30,10 +30,32 @@ export const getCourses = async () => {
   });
 };
 
+export const getCourseByCategory = async (categoryId) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const response = await axios.get(API + `course/category/${categoryId}`);
+      resolve({ data: response.data });
+    } catch (error) {
+      reject({ message: error.response.data.message });
+    }
+  });
+};
+
+export const getCourseByTitle = async (title) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const response = await axios.get(API + `course/title/${title}`);
+      resolve({ data: response.data });
+    } catch (error) {
+      reject({ message: error.response.data.message });
+    }
+  });
+};
+
 export const getCourseById = async (id) => {
   return new Promise(async (resolve, reject) => {
     try {
-      const response = await axios.get(API + `course/${id}`, {
+      const response = await axios.get(API + `course/id/${id}`, {
         withCredentials: true,
       });
       resolve({ data: response.data });

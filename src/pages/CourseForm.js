@@ -12,11 +12,16 @@ import {
   selectcourse,
 } from "../features/course/courseSlice";
 import { useNavigate } from "react-router-dom";
+import {
+  getCategoriesAsync,
+  selectcategory,
+} from "../features/category/categorySlice";
 
 const CourseForm = () => {
   const dispatch = useDispatch();
 
   const { newCourse, status, message } = useSelector(selectcourse);
+  const { categories } = useSelector(selectcategory);
 
   const navigate = useNavigate();
 
@@ -68,6 +73,14 @@ const CourseForm = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [newCourse]);
 
+  console.log(categories);
+
+  useEffect(() => {
+    if (categories.length === 0) {
+      dispatch(getCategoriesAsync());
+    }
+  }, []);
+
   return (
     <FormProvider {...formMethods}>
       <Toast
@@ -76,6 +89,23 @@ const CourseForm = () => {
         clearMessage={clearMessage}
       />
       <form className="flex flex-col gap-5" onSubmit={onSubmit}>
+        {/* Category Dropdown */}
+        <select
+          {...register("category", {
+            required: "Category is required...",
+          })}
+          className={inputClass}
+        >
+          <option value="">Select Category</option>
+          {categories.map((c, i) => (
+            <option key={i} value={c.id}>
+              {c.name}
+            </option>
+          ))}
+        </select>
+        {errors.category && (
+          <span className="text-red-500">{errors.category.message}</span>
+        )}
         {/* Title */}
         <input
           type="text"

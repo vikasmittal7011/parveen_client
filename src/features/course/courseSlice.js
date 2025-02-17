@@ -2,7 +2,9 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import {
   createCourse,
   enrollStudent,
+  getCourseByCategory,
   getCourseById,
+  getCourseByTitle,
   getCourses,
 } from "./courseAPI";
 
@@ -36,6 +38,20 @@ export const fetchCoursesByIdAsync = createAsyncThunk(
   async (id) => {
     const response = await getCourseById(id);
     return response;
+  }
+);
+
+export const fetchCoursesByCategoryAsync = createAsyncThunk(
+  "course/fetchCoursesByCategory",
+  async (categortId) => {
+    return await getCourseByCategory(categortId);
+  }
+);
+
+export const fetchCourseByTitleAsync = createAsyncThunk(
+  "course/fetchCourseByTitle",
+  async (title) => {
+    return await getCourseByTitle(title);
   }
 );
 
@@ -96,6 +112,17 @@ export const courseSlice = createSlice({
         state.status = "failed";
         state.message = action.error.message;
       })
+      .addCase(fetchCoursesByCategoryAsync.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(fetchCoursesByCategoryAsync.fulfilled, (state, action) => {
+        state.status = "idle";
+        state.courses = action.payload.data.data;
+      })
+      .addCase(fetchCoursesByCategoryAsync.rejected, (state, action) => {
+        state.status = "failed";
+        state.message = action.error.message;
+      })
       .addCase(enrollStudentAsync.pending, (state) => {
         state.status = "loading";
       })
@@ -107,11 +134,23 @@ export const courseSlice = createSlice({
       .addCase(enrollStudentAsync.rejected, (state, action) => {
         state.status = "failed";
         state.message = action.error.message;
+      })
+      .addCase(fetchCourseByTitleAsync.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(fetchCourseByTitleAsync.fulfilled, (state, action) => {
+        state.status = "idle";
+        state.course = action.payload.data.data;
+      })
+      .addCase(fetchCourseByTitleAsync.rejected, (state, action) => {
+        state.status = "failed";
+        state.message = action.error.message;
       });
   },
 });
 
-export const { clearMessage, emptyNewCourse, clearEnrollSuccess } = courseSlice.actions;
+export const { clearMessage, emptyNewCourse, clearEnrollSuccess } =
+  courseSlice.actions;
 
 export const selectcourse = (state) => state.course;
 
